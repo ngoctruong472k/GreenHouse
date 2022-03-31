@@ -111,9 +111,9 @@ $urlLogo = $protocol . $_SERVER['HTTP_HOST'] . '/public/upload/images/photo/thum
                 <div class="grid_duan">
                     @foreach ($service as $key => $item)
                         <div class="album_item">
-                            <span>{{ $item->title }} </span>
                             <a href=""><img src="{{ asset('public/upload/images/service/thumb/' . $item->photo) }}"
                                     alt="CÔNG TY TNHH KIẾN TRÚC NHẬT AN PHÁT">
+                                    <span>{{ $item->title }} </span>
                             </a>
 
                         </div>

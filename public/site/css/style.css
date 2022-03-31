@@ -1082,9 +1082,9 @@ a:hover{
 }
 
 .album_item span {
-    position: relative;
-    top: 40px;
-    left: 0px;
+    position: absolute;
+    top: 0;
+    left: 0;
     padding: 15px;
     z-index: 2;
     font-size: 18px;
