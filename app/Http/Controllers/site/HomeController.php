@@ -51,7 +51,7 @@ class HomeController extends Controller
         ]));
         $locale = Session::get('locale');
         $service = ServiceTranslation::join('services','services.id','=','service_translations.service_id')->where('service_translations.locale',$locale)
-        ->where('services.status', 1)->where('services.noi_bac', 1)->orderBy('services.id', 'DESC')->get();
+        ->where('services.status', 1)->where('services.noi_bac', 1)->orderBy('services.id', 'DESC')->paginate(3);
         $review = Review::where('status',1)->where('noi_bac',1)->get();
         $slider = Photo::where('status',1)->where('type','slide')->orderBy('stt','ASC')->get();
         $album = Photo::where('status',1)->where('type','album')->orderBy('stt','ASC')->get();
@@ -126,6 +126,55 @@ class HomeController extends Controller
         $output .= "</div>";
 
         echo $output;
+    }
+
+    public function readMore(Request $request)
+    {
+        $locale = Session::get('locale');
+        $output = "";
+        $page = $request->page;
+        $servicePage = 3;
+        $form = ($page - 1) * $servicePage;
+        $service = ServiceTranslation::join('services','services.id','=','service_translations.service_id')->where('service_translations.locale',$locale)
+        ->where('services.status', 1)->where('services.noi_bac', 1)->orderBy('services.id', 'DESC')->paginate($servicePage);
+
+        foreach ($service as $key => $item) {
+            $output .= '<div class="col col-md-4">
+            <div class="box-product">
+                <a href="">
+                    <img class="card-img-top"
+                        src="'.asset('public/upload/images/service/thumb/'.$item->photo).'"
+                        alt="{{ $item->title }}">
+                </a>
+                <p class="home-title"><a href="/dich-vu/'.$item->slug.'">'.$item->title.'</a></p>
+                <div class="box-price-bds">
+                    <img style="width: 25px;height: 25px; margin-right: 10px; margin-top: -6px;"
+                        src="'.asset('public/site/images/house-money.png').'">
+                    <span id="box-inner-price">85 tỉ</span>
+                    <span>-&nbsp;805m<sup>2</sup></span>
+                    <div class="date-post">
+                        <svg width="24px" height="24px" viewBox="0 0 24 24" id="Layer_1" data-name="Layer 1"
+                            xmlns="http://www.w3.org/2000/svg" class="clock-eight">
+                            <path
+                                d="M12,6a.99974.99974,0,0,0-1,1v4.38379L8.56934,12.60693a.99968.99968,0,1,0,.89843,1.78614l2.98145-1.5A.99874.99874,0,0,0,13,12V7A.99974.99974,0,0,0,12,6Zm0-4A10,10,0,1,0,22,12,10.01146,10.01146,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8.00917,8.00917,0,0,1,12,20Z" />
+                        </svg>
+                        29/03/2022
+                    </div>
+                </div>
+                <div class="box-time-bds" style="width: 100%; text-align: right; padding-top: 7px; ">
+                    <span>Biệt thự</span>
+                </div>
+                <div class="box-adress-bds"><span>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="map">
+                            <path
+                                d="M168.3 499.2C116.1 435 0 279.4 0 192C0 85.96 85.96 0 192 0C298 0 384 85.96 384 192C384 279.4 267 435 215.7 499.2C203.4 514.5 180.6 514.5 168.3 499.2H168.3zM192 256C227.3 256 256 227.3 256 192C256 156.7 227.3 128 192 128C156.7 128 128 156.7 128 192C128 227.3 156.7 256 192 256z" />
+                        </svg>
+                        Thảo Điền, Quận 2</span></div>
+            </div>
+        </div>';
+        }
+        return $output;
+
     }
 
     public function Search(Request $request)
