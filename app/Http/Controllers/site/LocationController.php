@@ -5,10 +5,9 @@ namespace App\Http\Controllers\site;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Helpers\Captcha;
+use App\Http\Controllers\Helpers\captcha;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Response;
-
 class LocationController extends Controller
 {
     public function loadQuanHuyen(Request $request)
@@ -19,7 +18,6 @@ class LocationController extends Controller
         foreach ($quan_huyen as $key => $value) {
             $output .= '<option value="'.$value->maqh.'">'.$value->name.'</option>';
         }
-
         echo $output;
     }
 
@@ -31,7 +29,6 @@ class LocationController extends Controller
         foreach ($xa_phuong as $key => $value) {
             $output .= '<option value="'.$value->name.'">'.$value->name.'</option>';
         }
-
         echo $output;
     }
 

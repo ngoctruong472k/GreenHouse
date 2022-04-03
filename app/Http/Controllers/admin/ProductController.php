@@ -30,7 +30,7 @@ class ProductController extends Controller
             "desc" => "Danh sách sản phẩm"
         ]));
         $product = Products::select('products.slug', 'products.photo' ,'products.id', 'products.name','products.status', 'products.noi_bac', 'products.created_at', 'products.price', 'categories.name AS category_name')
-        ->join('categories','categories.id','=','products.category_id')->where('type',0)->orderBy('products.id','DESC')->get();
+        ->leftJoin('categories','categories.id','=','products.category_id')->where('type',0)->orderBy('products.id','DESC')->get();
         return view('admin.product.index',compact('settings','product','row'));
     }
 
@@ -44,7 +44,7 @@ class ProductController extends Controller
         $settings = Config::all(['name', 'value'])->keyBy('name')->transform(function ($setting) {
             return $setting->value; // return only the value
         })->toArray();
-        $category = Category::where('status',1)->orderBy('id','DESC')->get();
+        $category = Category_LV1::orderBy('id','DESC')->get();
         $row = json_decode(json_encode([
             "title" => "Create product",
             "desc" => "Thêm sản phẩm"

@@ -35,34 +35,44 @@
                             </div>
                             <div class="form-group">
                                 <label for="area">Địa chỉ</label>
-                                <input type="text" class="form-control" value="{{ old('address') }}" id="address" name="address"
-                                    required>
+                                <input type="text" class="form-control" value="{{ old('address') }}" id="address"
+                                    name="address" required>
                             </div>
                             <div class="form-group">
                                 <label for="exampleTextarea1">Mô tả tóm tắt</label>
-                                <textarea class="form-control" id="exampleTextarea1" rows="4"
-                                    name="description">{{ old('description') }}</textarea>
+                                <textarea class="form-control" id="exampleTextarea1" rows="4" name="description">{{ old('description') }}</textarea>
                             </div>
                             <div class="form-group">
                                 <label for="exampleTextarea1">Nội dung</label>
-                                <textarea class="form-control" id="exampleTextarea1" rows="6"
-                                    name="content">{{ old('content') }}</textarea>
+                                <textarea class="form-control" id="exampleTextarea1" rows="6" name="content">{{ old('content') }}</textarea>
                             </div>
                         </div>
                     </div>
                 </div>
+                
                 <div class="col-md-5 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
                             <div class="form-group">
+                                <label for="exampleTextarea1">Danh mục</label>
+                                
+                                <select class="js-example-basic-multiple w-100" name="category_id">
+                                    
+                                    <option value="">
+                                        Chọn danh mục
+                                    </option>
+                                    @foreach ($category as $item)
+                                        <option value="{{ $item->id }}">{{ $item->title }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
                                 <label for="exampleTextarea1">Keywords (seo)</label>
-                                <textarea class="form-control" id="exampleTextarea1" rows="4"
-                                    name="keywords">{{ old('keywords') }}</textarea>
+                                <textarea class="form-control" id="exampleTextarea1" rows="4" name="keywords">{{ old('keywords') }}</textarea>
                             </div>
                             <div class="form-group">
                                 <label for="exampleTextarea1">Bản đồ</label>
-                                <textarea class="form-control" id="exampleTextarea1" rows="4"
-                                    name="map">{{ old('map') }}</textarea>
+                                <textarea class="form-control" id="exampleTextarea1" rows="4" name="map">{{ old('map') }}</textarea>
                             </div>
                             <div class="form-group">
                                 <label for="exampleTextarea1">Hiển thị</label>

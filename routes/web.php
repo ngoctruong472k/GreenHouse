@@ -64,6 +64,7 @@ Route::get("/category-lv1-show-products/{id}", [HomeController::class, "showProd
 Route::post("/show-map", [HomeController::class, "showMap"])->name('show.map');
 Route::post("/hover-category-lv-1", [HomeController::class, "hoverCategoryLV1"])->name('hover.category');
 Route::get("/home", [HomeController::class, "getProductByCategory"])->name('show.product.category');
+Route::get("/truong-dep-trai-cuc-xuc-ngu-nguc", [HomeController::class, "readMore"])->name('get.read.more');
 Route::get("/search", [HomeController::class, "Search"])->name('search.product');
 
 //Product

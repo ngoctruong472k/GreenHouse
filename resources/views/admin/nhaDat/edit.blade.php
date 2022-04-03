@@ -54,6 +54,16 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="form-group">
+                                <label for="exampleTextarea1">Danh mục</label>
+                                <select class="js-example-basic-multiple w-100" name="category_id">
+                                    @foreach ($category as $item)
+                                        <option value="{{ $item->id }}"
+                                            {{ $nhaDat->category_id == $item->id ? 'selected' : '' }}>{{ $item->title }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
                                 <label for="exampleTextarea1">Keywords (seo)</label>
                                 <textarea class="form-control" id="exampleTextarea1" rows="4"
                                     name="keywords">{{ old('keywords',$nhaDat->keywords) }}</textarea>

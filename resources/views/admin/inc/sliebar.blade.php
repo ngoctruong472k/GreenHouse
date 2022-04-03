@@ -7,7 +7,7 @@
             </a>
         </li>
 
-        {{-- <li class="nav-item">
+        <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false"
                 aria-controls="form-elements">
                 <i class="mdi mdi-view-headline menu-icon"></i>
@@ -17,11 +17,12 @@
             <div class="collapse" id="form-elements">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"><a class="nav-link" href="{{route('admin.category.lv1.index')}}">Danh mục cấp 1</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{route('admin.category.index')}}">Danh mục cấp 2</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{route('admin.product.index')}}">Sản phẩm</a></li>
+                    {{-- <li class="nav-item"><a class="nav-link" href="{{route('admin.category.index')}}">Danh mục cấp 2</a></li> --}}
+                    {{-- <li class="nav-item"><a class="nav-link" href="{{route('admin.product.index')}}">Sản phẩm</a></li> --}}
+                    <li class="nav-item"><a class="nav-link" href="{{route('admin.nha.dat.index')}}">Nhà đất</a></li>
                 </ul>
             </div>
-        </li> --}}
+        </li>
 
         <li class="nav-item">
             <a class="nav-link" href="{{ route('admin.service.index') }}">

@@ -92,8 +92,6 @@ class ProductSiteController extends Controller
 
     public function getAllNhaDat()
     {
-
-
         $settings = Config::all(['name', 'value'])
             ->keyBy('name')
             ->transform(function ($setting) {

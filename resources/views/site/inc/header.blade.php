@@ -36,15 +36,19 @@
                             </li>
                             <li class="nav-item bg-ani {{ Request::path() == 'tuyen-dung' ? 'actives' : '' }}">
                                 <a class="nav-link"
-                                    href="{{ route('get.recruit') }}">Cần mua - cần thuê</a>
+                                    href="{{ route('get.recruit') }}">thuê đất</a>
                             </li>
                             <li class="nav-item bg-ani {{ Request::path() == 'tuyen-dung' ? 'actives' : '' }}">
                                 <a class="nav-link"
-                                    href="{{ route('get.recruit') }}">Cần mua - cần thuê</a>
+                                    href="{{ route('get.recruit') }}">Ký gửi</a>
                             </li>
                             <li class="nav-item bg-ani {{ Request::path() == 'edu' ? 'actives' : '' }}">
                                 <a class="nav-link "
                                     href="{{ route('get.page.dao.tao') }}">Dự án</a>
+                            </li>
+                            <li class="nav-item bg-ani {{ Request::path() == 'edu' ? 'actives' : '' }}">
+                                <a class="nav-link "
+                                    href="{{ route('get.page.dao.tao') }}">Tin tức</a>
                             </li>
                             <li class="nav-item bg-ani {{ Request::path() == 'lien-he' ? 'actives' : '' }}">
                                 <a class="nav-link " href="/lien-he">{{ __('lang.contacts') }}</a>

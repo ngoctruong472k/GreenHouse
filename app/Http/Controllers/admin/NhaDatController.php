@@ -4,7 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Category;
+use App\Models\Category_LV1;
 use App\Models\Products;
 use App\Models\Config;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -41,12 +41,12 @@ class NhaDatController extends Controller
         $settings = Config::all(['name', 'value'])->keyBy('name')->transform(function ($setting) {
             return $setting->value; // return only the value
         })->toArray();
-        $category = Category::where('status',1)->orderBy('id','DESC')->get();
+        $category = Category_LV1::where('status',1)->orderBy('id','DESC')->get();
         $row = json_decode(json_encode([
             "title" => "Thêm dự án",
             "desc" => "Thêm dự án"
         ]));
-        return view('admin.nhaDat.add',compact('row' , 'settings'));
+        return view('admin.nhaDat.add',compact('row' ,'category', 'settings'));
     }
 
     /**
@@ -65,6 +65,7 @@ class NhaDatController extends Controller
             'slug' => 'required|unique:products,slug|max:255',
             'area' => 'required|max:15',
             'content' => 'required',
+            'category_id' => 'required',
             'status' => 'required',
             'photo' => 'required|mimes:jpg,png,jpeg,gif'
         ],[
@@ -141,14 +142,14 @@ class NhaDatController extends Controller
         $settings = Config::all(['name', 'value'])->keyBy('name')->transform(function ($setting) {
             return $setting->value; // return only the value
         })->toArray();
-
+        $category = Category_LV1::where('status',1)->orderBy('id','DESC')->get();
         $row = json_decode(json_encode([
             "title" => "Cập nhật nhà đất",
             "desc" => "Cập nhật nhà đất"
         ]));
         $nhaDat = DB::table('products')->where('id',$id)->where('type',1)->first();
         if(isset($nhaDat)){
-            return view('admin.nhaDat.edit',compact('nhaDat', 'row', 'settings'));
+            return view('admin.nhaDat.edit',compact('nhaDat','category', 'row', 'settings'));
         }
         return abort(404);
     }
