@@ -50,8 +50,12 @@ class HomeController extends Controller
             "height" => 110,
         ]));
         $locale = Session::get('locale');
+        $nhaDatNB = Products::where('type', 1)->where('status', 1)->where('noi_bac', 1)->paginate(6);
+        $nhaDat = Products::where('type', 1)->where('status', 1)->paginate(6);
         $service = ServiceTranslation::join('services','services.id','=','service_translations.service_id')->where('service_translations.locale',$locale)
-        ->where('services.status', 1)->where('services.noi_bac', 1)->orderBy('services.id', 'DESC')->paginate(3);
+        ->where('services.status', 1)->where('services.noi_bac', 1)->orderBy('services.id', 'DESC')->paginate(6);
+        $serviceGri = ServiceTranslation::join('services','services.id','=','service_translations.service_id')->where('service_translations.locale',$locale)
+        ->where('services.status', 1)->where('services.noi_bac', 1)->orderBy('services.id', 'DESC')->paginate(5);
         $review = Review::where('status',1)->where('noi_bac',1)->get();
         $slider = Photo::where('status',1)->where('type','slide')->orderBy('stt','ASC')->get();
         $album = Photo::where('status',1)->where('type','album')->orderBy('stt','ASC')->get();
@@ -62,13 +66,15 @@ class HomeController extends Controller
         $standard = StandardTranslation::join('standards','standards.id','=','standard_translations.standard_id')->where('standard_translations.locale',$locale)
         ->where('standards.status', 1)->where('standards.status', 1)->orderBy('standards.stt', 'ASC')->get();
         $pageGT = PageTranslation::join('pages','pages.id','=','page_translations.page_id')->where('page_translations.locale',$locale)->where('pages.slug','gioi-thieu')->first();
-        // $category = Category::where('status', 1)->orderBy('stt', 'ASC')->get();
-        $recruit = RecruitTranslation::join('recruits','recruits.id','=','recruit_translations.recruit_id')->where('recruit_translations.locale',$locale)
-        ->where('recruits.status', 1)->where('recruits.noi_bac', 1)->orderBy('recruits.id', 'DESC')->first();
+        $category = Category::where('status', 1)->orderBy('stt', 'ASC')->get();
+        // $recruit = RecruitTranslation::join('recruits','recruits.id','=','recruit_translations.recruit_id')->where('recruit_translations.locale',$locale)
+        //->where('recruits.status', 1)->where('recruits.noi_bac', 1)->orderBy('recruits.id', 'DESC')->first();
         // $cate_product = Products::select('products.id','products.name','products.price','products.view','products.photo','categories.name AS category_name')
         // ->join('categories', 'categories.id','=','products.category_id')
+        // $products = Products::join('services','services.id','=','service_translations.service_id')->where('service_translations.locale',$locale)
+        // ->where('services.status', 1)->where('services.noi_bac', 1)->orderBy('services.id', 'DESC')->paginate(6);
         // ->where('categories.id',$category_noibac[0]['id'])->where('products.type',0)->where('products.status',1)->orderBy('categories.stt', 'ASC')->paginate($settings['PHAN_TRANG_PRODUCT']);
-        return view('site.home.index', compact('news','video','bannerContent','album','recruit','partner','slider','settings', 'image', 'pageGT', 'standard', 'service'));
+        return view('site.home.index', compact('news','nhaDatNB','nhaDat','video','bannerContent','album','partner','slider','settings', 'image', 'pageGT', 'standard', 'service', 'serviceGri'));
     }
 
     public function showMap(Request $request)
@@ -133,20 +139,19 @@ class HomeController extends Controller
         $locale = Session::get('locale');
         $output = "";
         $page = $request->page;
-        $servicePage = 3;
+        $servicePage = 6;
         $form = ($page - 1) * $servicePage;
-        $service = ServiceTranslation::join('services','services.id','=','service_translations.service_id')->where('service_translations.locale',$locale)
-        ->where('services.status', 1)->where('services.noi_bac', 1)->orderBy('services.id', 'DESC')->paginate($servicePage);
+        $nhaDat = Products::where('type', 1)->where('status', 1)->where('noi_bac', 1)->paginate($servicePage);
 
-        foreach ($service as $key => $item) {
+        foreach ($nhaDat as $key => $item) {
             $output .= '<div class="col col-md-4">
             <div class="box-product">
-                <a href="">
+                <a href="/bat-dong-san/'.$item->slug.'">
                     <img class="card-img-top"
-                        src="'.asset('public/upload/images/service/thumb/'.$item->photo).'"
+                        src="'.asset('public/upload/images/nhaDat/thumb/'.$item->photo).'"
                         alt="{{ $item->title }}">
                 </a>
-                <p class="home-title"><a href="/dich-vu/'.$item->slug.'">'.$item->title.'</a></p>
+                <p class="home-title"><a href="/dich-vu/'.$item->slug.'">'.$item->name.'</a></p>
                 <div class="box-price-bds">
                     <img style="width: 25px;height: 25px; margin-right: 10px; margin-top: -6px;"
                         src="'.asset('public/site/images/house-money.png').'">

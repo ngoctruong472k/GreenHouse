@@ -64,15 +64,15 @@ Route::get("/category-lv1-show-products/{id}", [HomeController::class, "showProd
 Route::post("/show-map", [HomeController::class, "showMap"])->name('show.map');
 Route::post("/hover-category-lv-1", [HomeController::class, "hoverCategoryLV1"])->name('hover.category');
 Route::get("/home", [HomeController::class, "getProductByCategory"])->name('show.product.category');
-Route::get("/truong-dep-trai-cuc-xuc-ngu-nguc", [HomeController::class, "readMore"])->name('get.read.more');
+Route::get("/read-more", [HomeController::class, "readMore"])->name('get.read.more');
 Route::get("/search", [HomeController::class, "Search"])->name('search.product');
 
 //Product
 // Route::get("/san-pham/{slug}", [ProductSiteController::class, "getProductBySlug"])->name('get.product.slug');
-// Route::get("/san-pham", [ProductSiteController::class, "getAllProduct"])->name('get.product');
-// Route::get("/mua-ban-nha-dat/{slug}", [ProductSiteController::class, "getNhaDatBySlug"])->name('get.nha.dat.slug');
-// Route::get("/mua-ban-nha-dat", [ProductSiteController::class, "getAllNhaDat"])->name('get.nha.dat');
-// Route::get("/danh-muc/{slug}", [ProductSiteController::class, "productCategory"])->name('get.product.category.slug');
+// Route::get("/nha-dat-ban", [ProductSiteController::class, "getAllNhaDat"])->name('get.nhadatban');
+Route::get("/bat-dong-san/{slug}", [ProductSiteController::class, "getNhaDatBySlug"])->name('get.nha.dat.slug');
+Route::get("/bat-dong-san", [ProductSiteController::class, "getAllNhaDat"])->name('get.nha.dat');
+Route::get("/danh-muc/{slug}", [ProductSiteController::class, "productCategory"])->name('get.product.category.slug');
 
 //News
 Route::get("/tin-tuc/{slug}", [NewsSiteController::class, "getNewsBySlug"])->name('get.news.slug');
@@ -137,72 +137,72 @@ Route::prefix('admin')->group(function () {
             Route::post('/thong-ke-now', 'thongKeNow')->name('thong.ke.now');
             // Route::get('/test', 'test');
         });
-        // //Category LV1
-        // Route::name('admin.category.lv1.')->prefix('category-lv-1')->controller(CategoryLV1Controller::class)->group(function () {
-        //     Route::get('/', 'index')->name('index');
-        //     Route::get('/add', 'create')->name('add');
-        //     Route::post('/store', 'store')->name('store');
-        //     Route::get('/edit/{id}', 'edit')->name('edit');
-        //     Route::get('/delete/{id}', 'destroy')->name('delete');
-        //     Route::post('/update/{id}', 'update')->name('update');
-        //     Route::get('/delete-all/{id}', 'deleteAll')->name('delete.all');
-        //     Route::get('/noi-bac/{id}/{noiBac}', 'noiBac')->name('noi.bac');
-        //     Route::get('/status/{id}/{status}', 'status')->name('status');
-        //     Route::post('/resorting', 'resortPosition')->name('resorting');
-        // });
+        //Category LV1
+        Route::name('admin.category.lv1.')->prefix('category-lv-1')->controller(CategoryLV1Controller::class)->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/add', 'create')->name('add');
+            Route::post('/store', 'store')->name('store');
+            Route::get('/edit/{id}', 'edit')->name('edit');
+            Route::get('/delete/{id}', 'destroy')->name('delete');
+            Route::post('/update/{id}', 'update')->name('update');
+            Route::get('/delete-all/{id}', 'deleteAll')->name('delete.all');
+            Route::get('/noi-bac/{id}/{noiBac}', 'noiBac')->name('noi.bac');
+            Route::get('/status/{id}/{status}', 'status')->name('status');
+            Route::post('/resorting', 'resortPosition')->name('resorting');
+        });
 
-        // //Category
-        // Route::name('admin.category.')->prefix('category')->controller(CategoryController::class)->group(function () {
-        //     Route::get('/', 'index')->name('index');
-        //     Route::get('/add', 'create')->name('add');
-        //     Route::post('/store', 'store')->name('store');
-        //     Route::get('/edit/{id}', 'edit')->name('edit');
-        //     Route::post('/update/{id}', 'update')->name('update');
-        //     Route::get('/delete/{id}', 'destroy')->name('delete');
-        //     Route::get('/delete-all/{id}', 'deleteAll')->name('delete.all');
-        //     Route::get('/noi-bac/{id}/{noiBac}', 'noiBac')->name('noi.bac');
-        //     Route::get('/status/{id}/{status}', 'status')->name('status');
-        //     Route::post('/resorting', 'resortPosition')->name('resorting');
-        // });
+        //Category
+        Route::name('admin.category.')->prefix('category')->controller(CategoryController::class)->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/add', 'create')->name('add');
+            Route::post('/store', 'store')->name('store');
+            Route::get('/edit/{id}', 'edit')->name('edit');
+            Route::post('/update/{id}', 'update')->name('update');
+            Route::get('/delete/{id}', 'destroy')->name('delete');
+            Route::get('/delete-all/{id}', 'deleteAll')->name('delete.all');
+            Route::get('/noi-bac/{id}/{noiBac}', 'noiBac')->name('noi.bac');
+            Route::get('/status/{id}/{status}', 'status')->name('status');
+            Route::post('/resorting', 'resortPosition')->name('resorting');
+        });
 
-        // //Product
-        // Route::name('admin.product.')->prefix('product')->controller(ProductController::class)->group(function () {
-        //     Route::get('/', 'index')->name('index');
-        //     Route::get('/add', 'create')->name('add');
-        //     Route::post('/store', 'store')->name('store');
-        //     Route::get('/edit/{id}', 'edit')->name('edit');
-        //     Route::post('/update/{id}', 'update')->name('update');
-        //     Route::get('/delete/{id}', 'destroy')->name('delete');
-        //     Route::get('/delete-all/{id}', 'deleteAll')->name('delete.all');
-        //     Route::get('/noi-bac/{id}/{noiBac}', 'noiBac')->name('noi.bac');
-        //     Route::get('/status/{id}/{status}', 'status')->name('status');
-        // });
+        //Product
+        Route::name('admin.product.')->prefix('product')->controller(ProductController::class)->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/add', 'create')->name('add');
+            Route::post('/store', 'store')->name('store');
+            Route::get('/edit/{id}', 'edit')->name('edit');
+            Route::post('/update/{id}', 'update')->name('update');
+            Route::get('/delete/{id}', 'destroy')->name('delete');
+            Route::get('/delete-all/{id}', 'deleteAll')->name('delete.all');
+            Route::get('/noi-bac/{id}/{noiBac}', 'noiBac')->name('noi.bac');
+            Route::get('/status/{id}/{status}', 'status')->name('status');
+        });
 
-        // //Nha Dat
-        // Route::name('admin.nha.dat.')->prefix('nha-dat')->controller(NhaDatController::class)->group(function () {
-        //     Route::get('/', 'index')->name('index');
-        //     Route::get('/add', 'create')->name('add');
-        //     Route::post('/store', 'store')->name('store');
-        //     Route::get('/edit/{id}', 'edit')->name('edit');
-        //     Route::post('/update/{id}', 'update')->name('update');
-        //     Route::get('/delete/{id}', 'destroy')->name('delete');
-        //     Route::get('/delete-all/{id}', 'deleteAll')->name('delete.all');
-        //     Route::get('/noi-bac/{id}/{noiBac}', 'noiBac')->name('noi.bac');
-        //     Route::get('/status/{id}/{status}', 'status')->name('status');
-        // });
+        //Nha Dat
+        Route::name('admin.nha.dat.')->prefix('nha-dat')->controller(NhaDatController::class)->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/add', 'create')->name('add');
+            Route::post('/store', 'store')->name('store');
+            Route::get('/edit/{id}', 'edit')->name('edit');
+            Route::post('/update/{id}', 'update')->name('update');
+            Route::get('/delete/{id}', 'destroy')->name('delete');
+            Route::get('/delete-all/{id}', 'deleteAll')->name('delete.all');
+            Route::get('/noi-bac/{id}/{noiBac}', 'noiBac')->name('noi.bac');
+            Route::get('/status/{id}/{status}', 'status')->name('status');
+        });
 
-        // //Gallery
-        // Route::name('admin.gallery.')->prefix('gallery')->controller(GalleryController::class)->group(function () {
-        //     Route::get('/{id}', 'index')->name('index');
-        //     Route::get('/add/{id}', 'create')->name('add');
-        //     Route::post('/store/{id}', 'store')->name('store');
-        //     Route::get('/edit/{id}', 'edit')->name('edit');
-        //     Route::post('/update/{id}', 'update')->name('update');
-        //     Route::get('/delete/{id}', 'destroy')->name('delete');
-        //     Route::get('/delete-all/{id}', 'deleteAll')->name('delete.all');
-        //     Route::get('/status/{id}/{status}', 'status')->name('status');
-        //     Route::post('/resorting', 'resortPosition')->name('resorting');
-        // });
+        //Gallery
+        Route::name('admin.gallery.')->prefix('gallery')->controller(GalleryController::class)->group(function () {
+            Route::get('/{id}', 'index')->name('index');
+            Route::get('/add/{id}', 'create')->name('add');
+            Route::post('/store/{id}', 'store')->name('store');
+            Route::get('/edit/{id}', 'edit')->name('edit');
+            Route::post('/update/{id}', 'update')->name('update');
+            Route::get('/delete/{id}', 'destroy')->name('delete');
+            Route::get('/delete-all/{id}', 'deleteAll')->name('delete.all');
+            Route::get('/status/{id}/{status}', 'status')->name('status');
+            Route::post('/resorting', 'resortPosition')->name('resorting');
+        });
 
         //New
         Route::name('admin.news.')->prefix('news')->controller(NewsController::class)->group(function () {
